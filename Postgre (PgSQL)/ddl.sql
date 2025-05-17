@@ -1,8 +1,8 @@
 --Create schema
-create schema academia;
+create schema if not exists academia;
 
 -- Create student table
-create table academia.student(
+create table if not exists academia.student(
 	id              int  primary key generated always as identity,
 	uuid            uuid default gen_random_uuid(),
 	first_name      text,
@@ -11,7 +11,7 @@ create table academia.student(
 );
 
 -- Create faculty table
-create table academia.faculty(
+create table if not exists academia.faculty(
 	id               int primary key generated always as identity,
 	uuid             uuid default gen_random_uuid(),
 	first_name       text,
@@ -20,7 +20,7 @@ create table academia.faculty(
 );
 
 -- Create course table
-create table academia.course(
+create table if not exists academia.course(
 	id              int primary key generated always as identity,
 	uuid            uuid default gen_random_uuid(),
 	name            text,
@@ -30,11 +30,11 @@ create table academia.course(
 );
 
 -- Create enrollment table
-create table academia.enrollment(
+create table if not exists academia.enrollment(
 	id              int primary key generated always as identity,
 	uuid            uuid default gen_random_uuid(),
-	course_id       int references course(id),
-	student_id      int references student(id),
+	course_id       int references academia.course(id),
+	student_id      int references academia.student(id),
 	grade           text
 );
 
